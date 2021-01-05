@@ -1,20 +1,18 @@
-package com.gnomicsoftware.coursenotes;
+package com.gnomicsoftware.coursenotes.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.gnomicsoftware.coursenotes.R;
 import com.gnomicsoftware.coursenotes.repository.DataManager;
 import com.gnomicsoftware.coursenotes.repository.NoteInfo;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -34,7 +32,7 @@ public class NoteListActivity extends AppCompatActivity {
 			fab.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					startActivity(new Intent(NoteListActivity.this,NoteActivity.class));
+					startActivity(new Intent(NoteListActivity.this, NoteActivity.class));
 				}
 			});
 			
@@ -54,13 +52,10 @@ public class NoteListActivity extends AppCompatActivity {
 			listView.setAdapter(adapterNotes);
 			
 			listView.setOnItemClickListener((parent, view, position, id) -> {
-				NoteInfo selectedFromList = (NoteInfo) listView.getItemAtPosition(position);
-				
-				/*Snackbar.make(findViewById(R.id.list_notes),selectedFromList, Snackbar.LENGTH_LONG)
-						.setAction("Action", null).show();*/
+				// NoteInfo selectedFromList = (NoteInfo) listView.getItemAtPosition(position);
 				
 				Intent intent=new Intent(NoteListActivity.this, NoteActivity.class);
-				intent.putExtra(NoteActivity.NOTE_INFO,selectedFromList);
+				intent.putExtra(NoteActivity.NOTE_POSITION,position);
 				startActivity(intent);
 			});
 		}
